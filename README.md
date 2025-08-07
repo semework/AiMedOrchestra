@@ -48,72 +48,55 @@ Healthcare knowledge doubles every **73 days**. Clinicians juggle guidelines, im
   margin-left: auto;
   margin-right: auto;
   width: 95%;"/> 
+| ID   | Service              | Core Models                                   | Input → Output                                          |
+|------|----------------------|-----------------------------------------------|---------------------------------------------------------|
+| **A1**  | Data Synthesis         | CTGAN · VAE-Survival                        | schema → synthetic EHR rows                             |
+| **A2**  | Diagnostics LLM       | FLAN-T5-XXL + rules                          | vitals + notes + findings → ranked diagnoses            |
+| **A3** | Diet Planner          | GPT-2 text-gen (HF pipeline)                | patient profile → 7-day personalized meal plan          |
+| **A4**  | Drug Discovery GNN    | PyG GIN · GPT-GNN                            | target protein → 10 candidate molecules                 |
+| **A5** | Ethics & Bias Auditor | Fairlearn metrics · SHAP                    | decision logs → bias report                             |
+| **A6**  | Genomics              | DNABERT · ESM-1b                            | VCF → ACMG classification                               |
+| **A7**  | Imaging               | ResNet-50 · EfficientNet-b3 · Grad-CAM      | DICOM/PNG → label + heat-map                            |
+| **A8**  | Literature RAG        | Sentence-BERT + T5                           | query → summary + citations                             |
+| **A9**  | Mental-Health Chat    | DialoGPT-medium · RoBERTa-sent              | text turn → empathic reply + sentiment                  |
+| **A10**  | Treatment RL          | PPO (stable-baselines 3)                    | state vector → optimized dose plan                      |
+| **A11**  | Trial Matcher         | mini-BERT + regex                            | patient snapshot → recruiting trial IDs                 |
 
-| ID | Service | Core Models | Input → Output |
-|----|---------|-------------|----------------|
-| **A1** | Data Synthesiser | CTGAN, VAE-Survival | schema → synthetic EHR rows |
-| **A2** | Diagnostics LLM | FLAN-T5-XXL + rules | vitals + notes + findings → ranked diagnoses |
-| **A3** | Imaging | ResNet-50 · EfficientNet-b3 · Grad-CAM | DICOM/PNG → label + heat-map |
-| **A4** | Genomics | DNABERT · ESM-1b | VCF → ACMG class |
-| **A5** | Drug-Discovery GNN | PyG GIN · GPT-GNN | target → 10 candidate molecules |
-| **A6** | Treatment RL | PPO (sb3) | state → dose (“No/Low/Med/High”) |
-| **A7** | Literature RAG | SBERT + T5 | query → summary + citations |
-| **A8** | Trial Matcher | mini-BERT + regex | patient → recruiting trials |
-| **A9** | Mental-Health Chat | DialoGPT - RoBERTa-sent | text → empathic reply + cue |
-| **A10**| Ethics Auditor | fairness metrics + SHAP | logs → bias report |
 
----
-
-<a id="3"></a>
 ## 3 Agent Details
 
 ### Data Synthesiser (A1)
-Generates realistic synthetic EHR rows with **CTGAN**. Trains on tabular distributions, preserves utility while removing PHI — perfect for sandboxing downstream models.
-
----
+Generates realistic synthetic EHR rows with **CTGAN**. Trains on tabular distributions, preserves utility while removing PHI.
 
 ### Diagnostics LLM (A2)
-Fuses history, imaging and genomics into an AI-written differential. Feed a patient dict plus any free-text findings; returns ranked diagnoses and next-step recommendations in seconds.
+Fuses history, imaging and genomics into an AI‑written differential; returns ranked diagnoses and next‑step recommendations.
 
----
+### Diet Planner (A3)
+Generates 7-day meal plans from medical conditions and preferences using GPT-2. Tailors dietary advice to support comorbidities and lifestyle constraints.
 
-### Imaging Agent (A3)
-ResNet-50 + EfficientNet-b3 ensemble with Grad-CAM. Processes DICOM or PNG, outputs labels and heat-maps for fast visual verification.
+### Drug‑Discovery GNN (A4)
+Graph Neural pipeline ranks molecules for a disease target and explains reasoning.
 
----
+### Ethics & Bias Auditor (A5)
+Runs fairness metrics on synthetic twins; logs SHAP explanations.
 
-### Genomics Classifier (A4)
-Interprets VCF variants with DNABERT + ESM-1b, predicts ACMG pathogenicity and flags clinically actionable mutations for precision medicine.
+### Genomics Classifier (A6)
+DNABERT + ESM‑1b predict ACMG pathogenicity and flag actionable mutations.
 
----
+### Imaging Agent (A7)
+ResNet‑50 + EfficientNet‑b3 ensemble with Grad‑CAM. Outputs labels and heat‑maps for rapid visual verification.
 
-### Drug-Discovery GNN (A5)
-Graph-Neural pipeline (GIN, GPT-GNN) ranks top molecules for a disease target and explains reasoning in natural language.
+### Literature RAG (A8)
+SBERT retrieval + T5 summarization → evidence bullets with citations.
 
----
+### Mental‑Health Chat (A9)
+DialoGPT dialogue plus emotion classifier; outputs empathetic text + cue.
 
-### Treatment RL (A6)
-Policy-gradient PPO trained in a simulated diabetes environment. Accepts raw severity or full patient profile; returns safe No/Low/Med/High dosing plans.
+### Treatment RL (A10)
+PPO policy suggests safe No/Low/Med/High dosing plans from raw patient profiles.
 
----
-
-### Literature RAG (A7)
-SBERT retrieves, T5 summarises → bulleted evidence with citations. Keeps recommendations anchored in current literature.
-
----
-
-### Trial Matcher (A8)
-Scrapes ClinicalTrials.gov recruiting studies, parses eligibility, filters with regex and a mini-BERT binary classifier. Outputs actionable NCT IDs + titles + links.
-
----
-
-### Mental-Health Chat (A9)
-DialoGPT dialogue plus Distil-RoBERTa emotion classifier. Returns empathetic text *and* a plain-English cue (e.g. “Possible anxiety symptoms”).
-
----
-
-### Ethics & Bias Auditor (A10)
-Simulates decisions on synthetic patients from A1, computes fairness metrics (demographic parity, equalised odds) and logs SHAP explanations for audit.
+### Trial Matcher (A11)
+Screens ClinicalTrials.gov recruiting studies, returns NCT IDs, titles, links.
 
 ---
 
