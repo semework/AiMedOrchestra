@@ -65,7 +65,7 @@ Healthcare knowledge doubles every **73 days**. Clinicians juggle guidelines, im
 
 ## 3 Agent Details
 
-### Data Synthesiser (A1)
+### Data Synthesizer (A1)
 Generates realistic synthetic EHR rows with **CTGAN**. Trains on tabular distributions, preserves utility while removing PHI.
 
 ### Diagnostics LLM (A2)
