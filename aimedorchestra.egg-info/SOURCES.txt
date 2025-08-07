@@ -1,0 +1,9 @@
+pyproject.toml
+aimedorchestra/__init__.py
+aimedorchestra.egg-info/PKG-INFO
+aimedorchestra.egg-info/SOURCES.txt
+aimedorchestra.egg-info/dependency_links.txt
+aimedorchestra.egg-info/dependency_links.txt.bak
+aimedorchestra.egg-info/requires.txt
+aimedorchestra.egg-info/requires.txt.bak
+aimedorchestra.egg-info/top_level.txt

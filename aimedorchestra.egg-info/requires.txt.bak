@@ -1,0 +1,7 @@
+langgraph
+langchain-openai
+gradio
+
+[dev]
+ipykernel
+pytest

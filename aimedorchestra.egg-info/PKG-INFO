@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: aimedorchestra
+Version: 0.1.0
+Summary: Conditional LangGraph demo with Gradio chat UI
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: langgraph
+Requires-Dist: langchain-openai
+Requires-Dist: gradio
+Provides-Extra: dev
+Requires-Dist: ipykernel; extra == "dev"
+Requires-Dist: pytest; extra == "dev"

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aimedorchestra-orchestrator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aimedorchestra
+  template:
+    metadata:
+      labels:
+        app: aimedorchestra
+    spec:
+      containers:
+      - name: orchestrator
+        image: aimedorchestra:latest
+        ports:
+        - containerPort: 8501
+        command: ["streamlit", "run", "apps/orchestrator_app.py"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aimedorchestra-service
+spec:
+  selector:
+    app: aimedorchestra
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8501
+  type: LoadBalancer

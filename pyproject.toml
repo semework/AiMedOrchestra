@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aimedorchestra"
+version = "0.1.0"
+description = "Conditional LangGraph demo with Gradio chat UI"
+requires-python = ">=3.9"
+readme = "README.md"
+dependencies = [
+    "langgraph",
+    "langchain-openai",
+    "gradio",
+]
+
+[project.optional-dependencies]
+dev = ["ipykernel", "pytest"]
+[tool.setuptools]
+packages = ["aimedorchestra"]      # tell setuptools to install ONLY this one

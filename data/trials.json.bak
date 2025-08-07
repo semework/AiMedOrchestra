@@ -1,0 +1,48 @@
+{
+  "trials": [
+    {
+      "id": "Trial123",
+      "title": "Metformin for Type 2 Diabetes",
+      "condition": "Diabetes",
+      "summary": "A study to evaluate the effectiveness of Metformin in adults with Type 2 Diabetes.",
+      "url": "https://clinicaltrials.gov/ct2/show/NCT00000000",
+      "min_age": 18,
+      "max_age": 65,
+      "locations": ["Multi-site USA"],
+      "phase": "Phase 3"
+    },
+    {
+      "id": "Trial456",
+      "title": "Lifestyle Changes for Hypertension",
+      "condition": "Hypertension",
+      "summary": "Testing the effect of exercise and diet changes on blood-pressure control.",
+      "url": "https://clinicaltrials.gov/ct2/show/NCT00000001",
+      "min_age": 30,
+      "max_age": 80,
+      "locations": ["Multi-site USA"],
+      "phase": "Phase 2"
+    },
+    {
+      "id": "T1001",
+      "title": "Novel GLP-1 Trial",
+      "condition": "Diabetes",
+      "summary": "Evaluates efficacy and safety of a next-generation GLP-1 receptor agonist in adults with Type 2 Diabetes.",
+      "url": "https://clinicaltrials.gov/ct2/show/NCT000T1001",
+      "min_age": 30,
+      "max_age": 65,
+      "locations": ["New York, NY"],
+      "phase": "Phase 3"
+    },
+    {
+      "id": "T1002",
+      "title": "Low-Sodium Diet Study",
+      "condition": "Hypertension",
+      "summary": "Assesses blood-pressure reduction from a structured low-sodium diet in Stage 1–2 hypertension.",
+      "url": "https://clinicaltrials.gov/ct2/show/NCT000T1002",
+      "min_age": 40,
+      "max_age": 80,
+      "locations": ["Boston, MA"],
+      "phase": "Phase 2"
+    }
+  ]
+}
