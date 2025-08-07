@@ -1,16 +1,70 @@
-# AI Med Orchestra
-*A virtual hospital you can run on a laptop – ten specialised agents, one cooperative care team.*
-
+# Meet **AI Med Orchestra** : A Virtual AI Hospital for Smarter Healthcare
+*A virtual hospital you can run on a laptop – eleven specialised agents, one cooperative care team.*
 ## CTGAN / FLAN-T5 / ResNet / DNABERT / GPT-GNN in one AI hospital
 
-<p align="center"> <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/demo.gif" width="90%" alt="OmniHospital demo"> </p> 
+## What is AI Med Orchestra and Why Does It Matter?
+Imagine if every department in a modern hospital had an AI colleague — one that never sleeps, never forgets, and constantly studies the newest medical breakthroughs. That’s the vision behind **AiMedOrchestra** (also known as OmniHospital AI): an open-source, multi-agent platform that bundles **eleven specialized AIs** — each a board-certified genius in its own domain — into a single, cooperative care team that can run on your laptop.
 
-> *“What if every department in a modern hospital had an AI colleague—
-> one that never sleeps, never forgets, and constantly studies the
-> newest medical breakthroughs?”*  
-> That vision is OmniHospital AI, an open-source **multi-agent** platform
-> that bundles ten specialized AIs—each a board-certified genius in
-> its own domain—into a single, cooperative care team.
+Think of it as a virtual hospital made up of tireless, super-smart assistants, each expert in a different medical field, working together seamlessly to give the best possible care.  
+
+Why is this important? Because healthcare is both **extremely complex** and **fast-changing**. Doctors and nurses must juggle enormous volumes of information — patient histories, lab results, medical images, genetics, research papers, and treatment guidelines. No single human can keep up with it all, but AI can help. AiMedOrchestra’s coordinated team of AI agents empowers clinicians to manage complexity, stay current with medical advances, and deliver better patient outcomes.
+
+First, let's be on the same page with the main concepts and how we got here ...
+
+---
+
+## What Are LLMs and AI Agents, Simply Put?
+
+**Large Language Models (LLMs)**  
+These are computer programs trained on enormous amounts of text, like books, websites, and medical journals. They learn patterns in language and can answer questions, write explanations, or generate text that sounds human. Think of them as very advanced virtual assistants that understand and generate language. Agents, or a super photgraphic (AKA Eidetic memory) friend :) Reasoning and context are a whole other discussion!
+
+**AI Agents**  
+An “agent” is like a mini-expert robot inside your computer. It listens to questions or data, thinks about it using specialized skills or knowledge, and then provides answers or takes action. Unlike one big AI trying to do everything, agents are specialized — one might be great at reading X-rays, another at understanding genetics, another at mental health conversations.
+
+**Multi-Agent Systems**  
+Imagine a team of experts each doing their part and sharing notes. The final decision or advice comes from combining all their expertise. That’s what AiMedOrchestra does by connecting 11 different agents into one “care team.”
+
+---
+
+## Simple Example: How AI Agents and LLMs Work Together to Answer a Question
+
+Suppose you ask:  
+**“What is the capital of California?”**
+
+Here’s how a simple multi-agent system might answer:
+
+| Step | Agent / Model         | Role                              | Input                                 | Output                                  |
+|------|-----------------------|-----------------------------------|----------------------------------------|------------------------------------------|
+| 1    | Language Model Agent  | Understand the question           | “What is the capital of California?”   | Recognizes it’s a geography question     |
+| 2    | Search Agent          | Look up facts                     | Query: “Capital of California”         | Retrieves “Sacramento”                   |
+| 3    | LLM Agent             | Create an easy-to-understand reply| Fact: “Sacramento”                      | “The capital of California is Sacramento.”|
+
+The agents work together by passing information: The first agent understands the question’s meaning, the second finds the correct fact, and the third turns it into a natural sentence, as visualized in the diagram below.
+
+---
+
+<img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/LLM_workflow.png" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;"/> 
+
+This simple flow shows how specialized AI pieces (“agents”) handle different parts of the task, working together smoothly.
+
+---
+
+## How Does This Scale to Healthcare?
+Replace “capital of California” with a patient’s symptoms, lab tests, imaging scans, or genetic data. Replace “search agent” with AI trained on medical images or clinical trial databases. Now you have a multi-agent AI hospital like AiMedOrchestra that can:
+
+- Suggest diagnoses from symptoms and imaging  
+- Plan personalized diets and treatments  
+- Match patients to clinical trials  
+- Monitor fairness and ethics in AI decisions  
+
+And much more — all on your laptop!
+
+---
+
+<p align="center"> <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/demo.gif" width="90%" alt="OmniHospital demo"> </p> 
 
 > **Practice notebook**: see **`aimedorchestra_demo_notebook.ipynb`** for a guided tour with a router diagram, inline chat, and smoke‑tests.
 
@@ -22,27 +76,20 @@
 3. [Agent Details](#3)  
 4. [System Architecture](#4)  
 5. [Installation & Quick Start](#5)  
-6. [Agent APIs](#6)  
-7. [Data · Security · Privacy](#7)  
-8. [Evaluation & Benchmarks](#8)  
-9. [Limitations & Roadmap](#9)  
-10. [Contributing & Community](#10)  
-11. [License](#license)  
-12. [References](#refs)
+6. [Summary](#5) 
+7. [References](#refs)
 
 ---
 
 
-<a id="1"></a>
 ## 1 Vision & Motivation
 Healthcare knowledge doubles every **73 days**. Clinicians juggle guidelines, imaging, multi-omics, trial eligibility and evolving goals — often in legacy EMRs. Point AI tools help, but live in silos.
 
-**AIMedOrchestra** unifies ten narrow yet excellent agents into a digital care team:
+**AIMedOrchestra** unifies eleven narrow yet excellent agents into a digital care team:
 * **Edge-friendly** — a laptop or single-node K8s cluster is enough.
 
 ---
 
-<a id="2"></a>
 ## 2 Meet the Agents
 <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/router.png" style="display: block;
   margin-left: auto;
@@ -65,7 +112,7 @@ Healthcare knowledge doubles every **73 days**. Clinicians juggle guidelines, im
 
 ## 3 Agent Details
 
-### Data Synthesiser (A1)
+### Data Synthesizer (A1)
 Generates realistic synthetic EHR rows with **CTGAN**. Trains on tabular distributions, preserves utility while removing PHI.
 
 ### Diagnostics LLM (A2)
@@ -115,8 +162,13 @@ Screens ClinicalTrials.gov recruiting studies, returns NCT IDs, titles, links.
 > *Production scales horizontally via Kubernetes replicas.*
 
 ---
+## 5. Summary
+- **AiMedOrchestra** is like a team of AI doctors and specialists working together inside your computer.  
+- It uses many AI “agents,” each an expert in a healthcare domain, collaborating seamlessly.  
+- This approach helps doctors manage complex information, improve care, and keep up with rapid medical advances.  
+- By running on accessible hardware, it brings cutting-edge AI hospital capabilities into any clinical or research setting.
 
-## 5 Installation & Quick Start
+## 6 Installation & Quick Start
 
 ## Quick start
 
@@ -127,7 +179,6 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python scripts/download_models.py   # ~6 GB of open-source weights
 python main.py                      # CLI walk-through
-
  
 docker compose up --build
 open http://localhost:8501      # Streamlit dashboard
@@ -135,13 +186,12 @@ open http://localhost:8501      # Streamlit dashboard
 kind create cluster --name aimed
 kubectl apply -f kubernetes/base/
 kubectl apply -f kubernetes/agents/
- 
+ ```
 License
 Released under the Business Source License 1.1 – free for non-commercial & research use; commercial use requires a license after the Change Date.
-```
----
 
-11 References
+---
+## 7 References
  
 | Ref | Citation | Link |
 |-----|----------|------|
