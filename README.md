@@ -1,5 +1,5 @@
 # AI Med Orchestra
-*A virtual hospital you can run on a laptop – ten specialised agents, one cooperative care team.*
+*A virtual hospital you can run on a laptop – eleven specialized agents, one cooperative care team.*
 
 ## CTGAN / FLAN-T5 / ResNet / DNABERT / GPT-GNN in one AI hospital
 
@@ -9,7 +9,7 @@
 > one that never sleeps, never forgets, and constantly studies the
 > newest medical breakthroughs?”*  
 > That vision is OmniHospital AI, an open-source **multi-agent** platform
-> that bundles ten specialized AIs—each a board-certified genius in
+> that bundles eleven specialized AIs—each a board-certified genius in
 > its own domain—into a single, cooperative care team.
 
 > **Practice notebook**: see **`aimedorchestra_demo_notebook.ipynb`** for a guided tour with a router diagram, inline chat, and smoke‑tests.
@@ -37,7 +37,7 @@
 ## 1 Vision & Motivation
 Healthcare knowledge doubles every **73 days**. Clinicians juggle guidelines, imaging, multi-omics, trial eligibility and evolving goals — often in legacy EMRs. Point AI tools help, but live in silos.
 
-**AIMedOrchestra** unifies ten narrow yet excellent agents into a digital care team:
+**AIMedOrchestra** unifies eleven narrow yet excellent agents into a digital care team:
 * **Edge-friendly** — a laptop or single-node K8s cluster is enough.
 
 ---
