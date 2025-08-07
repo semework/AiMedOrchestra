@@ -3,14 +3,7 @@
 
 ## CTGAN / FLAN-T5 / ResNet / DNABERT / GPT-GNN in one AI hospital
 
-<!-- Embed demo video (loops, muted, no controls)  -->
-<p align="center">
-  <video src="https://github.com/semework/AiMedOrchestra/blob/main/assets/animated_AI_med.mp4" autoplay loop muted playsinline width="90%">
-    Your browser does not support the video tag.  
-    <a href="https://github.com/semework/AiMedOrchestra/blob/main/assets/animated_AI_med.mp4">Download the MP4 here.</a>
-  </video>
-</p>
-
+<p align="center"> <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/demo.gif" width="90%" alt="OmniHospital demo"> </p> 
 
 > *“What if every department in a modern hospital had an AI colleague—
 > one that never sleeps, never forgets, and constantly studies the
@@ -45,13 +38,7 @@
 Healthcare knowledge doubles every **73 days**. Clinicians juggle guidelines, imaging, multi-omics, trial eligibility and evolving goals — often in legacy EMRs. Point AI tools help, but live in silos.
 
 **AIMedOrchestra** unifies ten narrow yet excellent agents into a digital care team:
-
-* **Continuous learning** — each agent monitors new datasets & literature.  
-* **Horizontal hand-offs** — context passes on a Redis bus; no re-typing.  
-* **Explainability first** — every prediction carries a human-readable rationale.  
 * **Edge-friendly** — a laptop or single-node K8s cluster is enough.
-
-Born at NeuroHealth Lab (2025), now community-driven for research, hackathons and teaching.
 
 ---
 
