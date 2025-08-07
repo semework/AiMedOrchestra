@@ -5,9 +5,9 @@
 
 <!-- Embed demo video (loops, muted, no controls)  -->
 <p align="center">
-  <video src="assets/animated_AI_med.mp4" autoplay loop muted playsinline width="90%">
+  <video src="https://github.com/semework/AiMedOrchestra/blob/main/assets/animated_AI_med.mp4" autoplay loop muted playsinline width="90%">
     Your browser does not support the video tag.  
-    <a href="assets/animated_AI_med.mp4">Download the MP4 here.</a>
+    <a href="https://github.com/semework/AiMedOrchestra/blob/main/assets/animated_AI_med.mp4">Download the MP4 here.</a>
   </video>
 </p>
 
@@ -57,7 +57,7 @@ Born at NeuroHealth Lab (2025), now community-driven for research, hackathons an
 
 <a id="2"></a>
 ## 2 Meet the Agents
-<img src="assets/router.png" style="display: block;
+<img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/router.png" style="display: block;
   margin-left: auto;
   margin-right: auto;
   width: 95%;"/> 
