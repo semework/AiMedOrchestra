@@ -1,6 +1,7 @@
 # Meet **AI Med Orchestra** : A Virtual AI Hospital for Smarter Healthcare
 *A virtual hospital you can run on a laptop – eleven specialised agents, one cooperative care team.*
 ## CTGAN / FLAN-T5 / ResNet / DNABERT / GPT-GNN in one AI hospital
+<p align="center"> <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/demo.gif" width="90%" alt="OmniHospital demo"> </p> 
 
 ## What is AI Med Orchestra and Why Does It Matter?
 Imagine if every department in a modern hospital had an AI colleague — one that never sleeps, never forgets, and constantly studies the newest medical breakthroughs. That’s the vision behind **AiMedOrchestra** (also known as OmniHospital AI): an open-source, multi-agent platform that bundles **eleven specialized AIs** — each a board-certified genius in its own domain — into a single, cooperative care team that can run on your laptop.
@@ -63,8 +64,6 @@ Replace “capital of California” with a patient’s symptoms, lab tests, imag
 And much more — all on your laptop!
 
 ---
-
-<p align="center"> <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/demo.gif" width="90%" alt="OmniHospital demo"> </p> 
 
 > **Practice notebook**: see **`aimedorchestra_demo_notebook.ipynb`** for a guided tour with a router diagram, inline chat, and smoke‑tests.
 
