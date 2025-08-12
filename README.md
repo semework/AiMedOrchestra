@@ -170,7 +170,6 @@ Screens ClinicalTrials.gov recruiting studies, returns NCT IDs, titles, links.
 
 ## 6 Installation & Quick Start
 
-## Quick start
 
 ```bash
 git clone https://github.com/semework/AiMedOrchestra.git
