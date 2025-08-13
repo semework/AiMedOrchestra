@@ -1,12 +1,8 @@
 # Meet **AI Med Orchestra** : A Virtual AI Hospital for Smarter Healthcare
 
-<div style="display: flex; align-items: center;">
-  <div>
-    A virtual hospital you can run on a laptop – eleven specialised agents, one cooperative care team.<br>
-    CTGAN / FLAN-T5 / ResNet / DNABERT / GPT-GNN in one AI hospital
-  </div>
-  <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/AiMed_logo.png" alt="AI Med Orchestra Logo" style="height: 3em; margin-left: 10px;">
-</div>
+|                                                                                                                     |                                                                                   |
+|:--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------:|
+| A virtual hospital you can run on a laptop – eleven specialized agents, one cooperative care team. <br><br> **CTGAN / FLAN-T5 / ResNet / DNABERT / GPT-GNN in one AI hospital** | <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/AiMed_logo.png" alt="AI Med Orchestra" height="96"> |
 
 <p align="center"> <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/demo.gif" width="90%" alt="OmniHospital demo"> </p> 
 
