@@ -182,3 +182,6 @@ AiMedOrchestra is a team of specialized AI agents coordinated by an orchestrator
 
 ## 6) License
 Released for non‑commercial & research use. See the repository’s LICENSE file for details.
+
+
+**Thanks to [Matthew Phillips](https://www.linkedin.com/in/mattphillipsneuroscience/) for reviewing this article and helping improve its clarity and flow.**
