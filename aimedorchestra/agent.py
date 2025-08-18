@@ -240,8 +240,7 @@ class aimedorchestraAgent:
                     pass
                 return result
             if hasattr(agent, "run"):
-                # Fallback to natural language input instead of dict to avoid regex/type errors in simple agents
-                return agent.run("create " + str(n) + " synthetic patient" + ("s" if n != 1 else ""))
+                return agent.run({"task": "synthesize", "n": n})
             return {"error": "data_synthesis: no entrypoint"}
 
         # Diagnostics

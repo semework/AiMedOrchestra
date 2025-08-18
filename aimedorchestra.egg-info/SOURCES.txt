@@ -1,5 +1,8 @@
+LICENSE
+README.md
 pyproject.toml
 aimedorchestra/__init__.py
+aimedorchestra/agent.py
 aimedorchestra.egg-info/PKG-INFO
 aimedorchestra.egg-info/SOURCES.txt
 aimedorchestra.egg-info/dependency_links.txt

@@ -164,34 +164,128 @@ Screens ClinicalTrials.gov recruiting studies, returns NCT IDs, titles, links.
 > *Production scales horizontally via Kubernetes replicas.*
 
 ---
-## 5. Summary
+
+## 5 Installation & Quick Start
+
+
+## 1) Clone & create a virtual env
+```bash
+git clone https://github.com/semework/AiMedOrchestra.git
+cd AiMedOrchestra
+
+# Python 3.10+ recommended
+python -m venv .venv
+source .venv/bin/activate  # on Windows: .venv\Scripts\activate
+```
+
+## 2) Install dependencies
+You have both `requirements.txt` and `pyproject.toml`. Either works—pick one:
+
+**Option A — from `requirements.txt`**
+```bash
+pip install -r requirements.txt
+```
+
+**Option B — editable install from `pyproject.toml` (preferred for development)**
+```bash
+pip install -e .
+```
+> Tip: editable install lets you `import aimedorchestra...` anywhere without fiddling with `PYTHONPATH`.
+
+---
+
+## 3) Run the conversational notebook (recommended)
+A chat-enabled notebook is already in the repo:
+
+```bash
+jupyter lab  # or: jupyter notebook
+# Then open: aimedorchestra_demo_notebook_chat.ipynb
+# Run the "Chat UI for AiMedOrchestra" cell and start talking:
+#   - "create two synthetic patients"
+#   - "diagnose a 55 yo female with chest pain and cough"
+#   - "find clinical trials for lung cancer near Boston"
+#   - 'run full pipeline on {"age":60, "sex":"male"}'
+```
+
+---
+
+## 4) Quick conversational REPL (no notebook required)
+
+**Best with editable install (`pip install -e .`):**
+```bash
+python - << 'PY'
+from aimedorchestra.orchestrator.agent import aimedorchestraAgent
+
+orch = aimedorchestraAgent()
+print(orch.route("create two synthetic patients"))
+print(orch.route("diagnose a 55 yo female with chest pain and cough"))
+print(orch.route("find clinical trials for lung cancer near Boston"))
+print(orch.route('run full pipeline on {"age":60,"sex":"male","conditions":["diabetes"]}'))
+PY
+```
+
+**Alternative (use the top-level file from the repo root):**
+```bash
+PYTHONPATH=. python - << 'PY'
+from aimedorchestraagent import aimedorchestraAgent
+print(aimedorchestraAgent().route("create 3 synthetic patients"))
+PY
+```
+
+---
+
+## 5) Run per-agent demo apps
+
+### If the app is **Streamlit**
+> If the app can’t see the package, prefix with `PYTHONPATH=.`  
+```bash
+PYTHONPATH=. streamlit run apps/orchestrator_app.py
+# or per-agent:
+# PYTHONPATH=. streamlit run apps/data_synthesis_app.py
+# PYTHONPATH=. streamlit run apps/diagnostics_app.py
+# ...
+```
+
+### If the app is **pure Python / Dash**
+```bash
+python apps/orchestrator_app.py
+# or per-agent:
+# python apps/data_synthesis_app.py
+# python apps/diagnostics_app.py
+# ...
+```
+> Most Streamlit apps listen on port **8501** and Dash commonly on **8050**. The app will announce the URL in your terminal.
+
+---
+
+## 6) (Optional) Docker
+Your repo has a `Dockerfile` (no `docker-compose.yml` in the tree). Build and run directly:
+
+```bash
+# Build
+docker build -t aimed:latest .
+
+# Run — pick the likely port based on your app:
+# If Streamlit (8501):
+docker run --rm -p 8501:8501 aimed
+# If Dash/Flask (8050):
+# docker run --rm -p 8050:8050 aimed
+```
+Then open the URL it prints (e.g., http://localhost:8501 or http://localhost:8050).
+
+> If you later add a `docker-compose.yml`, you can switch to `docker compose up --build`.
+
+
+---
+
+## 6. Summary
 - **AiMedOrchestra** is like a team of AI doctors and specialists working together inside your computer.  
 - It uses many AI “agents,” each an expert in a healthcare domain, collaborating seamlessly.  
 - This approach helps doctors manage complex information, improve care, and keep up with rapid medical advances.  
 - By running on accessible hardware, it brings cutting-edge AI hospital capabilities into any clinical or research setting.
 
-## 6 Installation & Quick Start
-
-
-```bash
-git clone https://github.com/semework/AiMedOrchestra.git
-cd aimedorchestra-ai
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python scripts/download_models.py   # ~6 GB of open-source weights
-python main.py                      # CLI walk-through
- 
-docker compose up --build
-open http://localhost:8501      # Streamlit dashboard
- 
-kind create cluster --name aimed
-kubectl apply -f kubernetes/base/
-kubectl apply -f kubernetes/agents/
- ```
-License
-Released under the Business Source License 1.1 – free for non-commercial & research use; commercial use requires a license after the Change Date.
-
 ---
+
 ## 7 References
  
 | Ref | Citation | Link |
@@ -203,8 +297,14 @@ Released under the Business Source License 1.1 – free for non-commercial & res
 | 5 | Jin, Q.; Wang, Z.; Floudas, C. S. *et al.* “Matching Patients to Clinical Trials with Large Language Models.” *Nature Communications* 15, Article 53081 (2024). | <https://www.nature.com/articles/s41467-024-53081-z> |
 | 6 | Mehrabi, N. *et al.* “A Survey on Bias and Fairness in Machine Learning.” *ACM Computing Surveys* 54 (6), 2021. | <https://arxiv.org/abs/1908.09635> |
 | 7 | Densen, B. “Challenges and Opportunities Facing Medical Education.” *Transactions of the American Clinical and Climatological Association* 122, 2011. | <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3116346> |
+
 ---
 
 If you use AiMedOrchestra in research, please cite:
 
 Mulugeta Semework Abebe. 2025. “AiMedOrchestra: A Multi-Agent Platform for Full Med Care.” 
+
+---
+
+## License
+Released under the Business Source License 1.1 – free for non-commercial & research use; commercial use requires a license after the Change Date.
