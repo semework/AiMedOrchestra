@@ -1,174 +1,55 @@
-# Meet **AI Med Orchestra** : A Virtual AI Hospital for Smarter Healthcare
+# AiMedOrchestra — Overview + Setup & Run Guide
 
-|                                                                                                                     |                                                                                   |
-|:--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------:|
-| A virtual hospital you can run on a laptop – eleven specialized agents, one cooperative care team. <br><br> **CTGAN / FLAN-T5 / ResNet / DNABERT / GPT-GNN in one AI hospital** | <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/AiMed_logo.png" alt="AI Med Orchestra" height="96"> |
-
-<p align="center"> <img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/demo.gif" width="90%" alt="OmniHospital demo"> </p> 
-
-## What is AI Med Orchestra and Why Does It Matter?
-Imagine if every department in a modern hospital had an AI colleague — one that never sleeps, never forgets, and constantly studies the newest medical breakthroughs. That’s the vision behind **AiMedOrchestra** (also known as OmniHospital AI): an open-source, multi-agent platform that bundles **eleven specialized AIs** — each a board-certified genius in its own domain — into a single, cooperative care team that can run on your laptop.
-
-Think of it as a virtual hospital made up of tireless, super-smart assistants, each expert in a different medical field, working together seamlessly to give the best possible care.  
-
-Why is this important? Because healthcare is both **extremely complex** and **fast-changing**. Doctors and nurses must juggle enormous volumes of information — patient histories, lab results, medical images, genetics, research papers, and treatment guidelines. No single human can keep up with it all, but AI can help. AiMedOrchestra’s coordinated team of AI agents empowers clinicians to manage complexity, stay current with medical advances, and deliver better patient outcomes.
-
-First, let's be on the same page with the main concepts and how we got here ...
+> A virtual AI hospital you can run on a laptop — multiple specialist agents coordinated by a conversational orchestrator.
 
 ---
 
-## What Are LLMs and AI Agents, Simply Put?
-
-**Large Language Models (LLMs)**  
-These are computer programs trained on enormous amounts of text, like books, websites, and medical journals. They learn patterns in language and can answer questions, write explanations, or generate text that sounds human. Think of them as very advanced virtual assistants that understand and generate language. Agents, or a super photgraphic (AKA Eidetic memory) friend :) Reasoning and context are a whole other discussion!
-
-**AI Agents**  
-An “agent” is like a mini-expert robot inside your computer. It listens to questions or data, thinks about it using specialized skills or knowledge, and then provides answers or takes action. Unlike one big AI trying to do everything, agents are specialized — one might be great at reading X-rays, another at understanding genetics, another at mental health conversations.
-
-**Multi-Agent Systems**  
-Imagine a team of experts each doing their part and sharing notes. The final decision or advice comes from combining all their expertise. That’s what AiMedOrchestra does by connecting 11 different agents into one “care team.”
-
----
-
-## Simple Example: How AI Agents and LLMs Work Together to Answer a Question
-
-Suppose you ask:  
-**“What is the capital of California?”**
-
-Here’s how a simple multi-agent system might answer:
-
-| Step | Agent / Model         | Role                              | Input                                 | Output                                  |
-|------|-----------------------|-----------------------------------|----------------------------------------|------------------------------------------|
-| 1    | Language Model Agent  | Understand the question           | “What is the capital of California?”   | Recognizes it’s a geography question     |
-| 2    | Search Agent          | Look up facts                     | Query: “Capital of California”         | Retrieves “Sacramento”                   |
-| 3    | LLM Agent             | Create an easy-to-understand reply| Fact: “Sacramento”                      | “The capital of California is Sacramento.”|
-
-The agents work together by passing information: The first agent understands the question’s meaning, the second finds the correct fact, and the third turns it into a natural sentence, as visualized in the diagram below.
+## Table of Contents
+1. [Overview](#1-overview)
+2. [Mini Pipeline (3 Steps)](#2-mini-pipeline-3-steps)
+3. [Installation & Quick Start](#3-installation--quick-start)
+   - [3.1 Clone & Create a Virtual Env](#31-clone--create-a-virtual-env)
+   - [3.2 Install Dependencies](#32-install-dependencies)
+   - [3.3 Run the Conversational Notebook](#33-run-the-conversational-notebook)
+   - [3.4 Quick Conversational REPL](#34-quick-conversational-repl)
+   - [3.5 Run Per‑Agent Demo Apps](#35-run-peragent-demo-apps)
+   - [3.6 Docker (Optional)](#36-docker-optional)
+   - [3.7 Kubernetes (Optional)](#37-kubernetes-optional)
+   - [3.8 Data & Samples](#38-data--samples)
+   - [3.9 Troubleshooting](#39-troubleshooting)
+4. [Summary](#4-summary)
+5. [References](#5-references)
+6. [License](#6-license)
 
 ---
 
-<img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/LLM_workflow.png" style="display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;"/> 
+## 1) Overview
 
-This simple flow shows how specialized AI pieces (“agents”) handle different parts of the task, working together smoothly.
+Swap the trivia question for a patient’s **symptoms**, **labs**, **imaging**, or **genomics**.  
+**AiMedOrchestra** routes your natural sentence to the right specialist agent(s) and stitches results into a single response.
 
----
-
-## How Does This Scale to Healthcare?
-Replace “capital of California” with a patient’s symptoms, lab tests, imaging scans, or genetic data. Replace “search agent” with AI trained on medical images or clinical trial databases. Now you have a multi-agent AI hospital like AiMedOrchestra that can:
-
-- Suggest diagnoses from symptoms and imaging  
-- Plan personalized diets and treatments  
-- Match patients to clinical trials  
-- Monitor fairness and ethics in AI decisions  
-
-And much more — all on your laptop!
+- The **orchestrator** reads your request (“create two synthetic patients”, “trials near Boston”) and picks the right agent(s).
+- Each **agent** is a focused specialist (diagnostics, imaging, genomics, trials, diet/treatment, literature, mental‑health support, ethics).
+- Outputs from one agent can feed the next, giving you an end‑to‑end answer in plain language.
 
 ---
 
-> **Practice notebook**: see **`aimedorchestra_demo_notebook.ipynb`** for a guided tour with a router diagram, inline chat, and smoke‑tests.
+## 2) Mini Pipeline (3 agents)
+
+| Agent | Agent / Model | Role | Input | Output |
+| --- | --- | --- | --- | --- |
+| 1 | Data Synthesis | Create synthetic patient records | N = 2 | Two JSON rows (synthetic patients) |
+| 2 | Diagnostics | Suggest likely diagnosis from symptoms | 55F, chest pain + cough | Differential (e.g., bronchitis, pneumonia) |
+| 3 | Clinical Trial Matching | Find recruiting trials for a given profile | 65M, lung cancer, Boston | Trial shortlist (e.g., NCT012345, NCT067890) |
+
+
+> **How to use it:** Type natural instructions. The orchestrator handles routing (e.g., “**create 2 synthetic patients**”, “**diagnose a 55 yo female with chest pain**”, “**trials for lung cancer near Boston**”).
 
 ---
 
-### Table of Contents
-1. [Vision & Motivation](#1)  
-2. [Meet the Agents](#2)  
-3. [Agent Details](#3)  
-4. [System Architecture](#4)  
-5. [Installation & Quick Start](#5)  
-6. [Summary](#5) 
-7. [References](#refs)
+## 3) Installation & Quick Start
 
----
-
-
-## 1 Vision & Motivation
-Healthcare knowledge doubles every **73 days**. Clinicians juggle guidelines, imaging, multi-omics, trial eligibility and evolving goals — often in legacy EMRs. Point AI tools help, but live in silos.
-
-**AIMedOrchestra** unifies eleven narrow yet excellent agents into a digital care team:
-* **Edge-friendly** — a laptop or single-node K8s cluster is enough.
-
----
-
-## 2 Meet the Agents
-<img src="https://github.com/semework/AiMedOrchestra/blob/main/assets/router.png" style="display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;"/> 
-| ID   | Service              | Core Models                                   | Input → Output                                          |
-|------|----------------------|-----------------------------------------------|---------------------------------------------------------|
-| **A1**  | Data Synthesis         | CTGAN · VAE-Survival                        | schema → synthetic EHR rows                             |
-| **A2**  | Diagnostics LLM       | FLAN-T5-XXL + rules                          | vitals + notes + findings → ranked diagnoses            |
-| **A3** | Diet Planner          | GPT-2 text-gen (HF pipeline)                | patient profile → 7-day personalized meal plan          |
-| **A4**  | Drug Discovery GNN    | PyG GIN · GPT-GNN                            | target protein → 10 candidate molecules                 |
-| **A5** | Ethics & Bias Auditor | Fairlearn metrics · SHAP                    | decision logs → bias report                             |
-| **A6**  | Genomics              | DNABERT · ESM-1b                            | VCF → ACMG classification                               |
-| **A7**  | Imaging               | ResNet-50 · EfficientNet-b3 · Grad-CAM      | DICOM/PNG → label + heat-map                            |
-| **A8**  | Literature RAG        | Sentence-BERT + T5                           | query → summary + citations                             |
-| **A9**  | Mental-Health Chat    | DialoGPT-medium · RoBERTa-sent              | text turn → empathic reply + sentiment                  |
-| **A10**  | Treatment RL          | PPO (stable-baselines 3)                    | state vector → optimized dose plan                      |
-| **A11**  | Trial Matcher         | mini-BERT + regex                            | patient snapshot → recruiting trial IDs                 |
-
-
-## 3 Agent Details
-
-### Data Synthesizer (A1)
-Generates realistic synthetic EHR rows with **CTGAN**. Trains on tabular distributions, preserves utility while removing PHI.
-
-### Diagnostics LLM (A2)
-Fuses history, imaging and genomics into an AI‑written differential; returns ranked diagnoses and next‑step recommendations.
-
-### Diet Planner (A3)
-Generates 7-day meal plans from medical conditions and preferences using GPT-2. Tailors dietary advice to support comorbidities and lifestyle constraints.
-
-### Drug‑Discovery GNN (A4)
-Graph Neural pipeline ranks molecules for a disease target and explains reasoning.
-
-### Ethics & Bias Auditor (A5)
-Runs fairness metrics on synthetic twins; logs SHAP explanations.
-
-### Genomics Classifier (A6)
-DNABERT + ESM‑1b predict ACMG pathogenicity and flag actionable mutations.
-
-### Imaging Agent (A7)
-ResNet‑50 + EfficientNet‑b3 ensemble with Grad‑CAM. Outputs labels and heat‑maps for rapid visual verification.
-
-### Literature RAG (A8)
-SBERT retrieval + T5 summarization → evidence bullets with citations.
-
-### Mental‑Health Chat (A9)
-DialoGPT dialogue plus emotion classifier; outputs empathetic text + cue.
-
-### Treatment RL (A10)
-PPO policy suggests safe No/Low/Med/High dosing plans from raw patient profiles.
-
-### Trial Matcher (A11)
-Screens ClinicalTrials.gov recruiting studies, returns NCT IDs, titles, links.
-
----
-
-### 4 System Architecture — *AiMedOrchestra*
-
-| Layer 📦 | Technology / Notes |
-|----------|--------------------|
-| **Orchestrator** | **LangGraph** finite-state router (Python, hot-reload friendly) |
-| **Message Bus** | **Redis Streams + JSONSchema** (default) · swap-in **NATS** for multi-cluster deployments |
-| **Agents** | One **Docker** image per agent <br>— semantic-versioned (`v1.x.y`) and health-checked at `/healthz` |
-| **Storage** | **MinIO** (object blobs — DICOM, PDFs, models) <br>**PostgreSQL** (metadata & audit log) |
-| **Deploy** | GitHub Actions → Docker Hub CI/CD <br>**Helm chart** in `/k8s/helm/` for K8s / KinD |
-| **Observability** | **Prometheus** + **Grafana** dashboards (CPU, GPU, per-agent latency) |
-
-> **Minimum dev rig:** 8 vCPU · 24 GB RAM · NVIDIA RTX 3060 (12 GB)<br>
-> *Production scales horizontally via Kubernetes replicas.*
-
----
-
-## 5 Installation & Quick Start
-
-
-## 1) Clone & create a virtual env
+### 3.1 Clone & Create a Virtual Env
 ```bash
 git clone https://github.com/semework/AiMedOrchestra.git
 cd AiMedOrchestra
@@ -178,40 +59,33 @@ python -m venv .venv
 source .venv/bin/activate  # on Windows: .venv\Scripts\activate
 ```
 
-## 2) Install dependencies
-You have both `requirements.txt` and `pyproject.toml`. Either works—pick one:
+### 3.2 Install Dependencies
+Use either `requirements.txt` or editable install via `pyproject.toml`:
 
-**Option A — from `requirements.txt`**
+**Option A — requirements.txt**
 ```bash
 pip install -r requirements.txt
 ```
 
-**Option B — editable install from `pyproject.toml` (preferred for development)**
+**Option B — editable install (preferred for dev)**
 ```bash
 pip install -e .
 ```
-> Tip: editable install lets you `import aimedorchestra...` anywhere without fiddling with `PYTHONPATH`.
+> Editable install lets you `import aimedorchestra...` without fiddling with `PYTHONPATH`.
 
----
-
-## 3) Run the conversational notebook (recommended)
-A chat-enabled notebook is already in the repo:
-
+### 3.3 Run the Conversational Notebook
 ```bash
 jupyter lab  # or: jupyter notebook
-# Then open: aimedorchestra_demo_notebook_chat.ipynb
-# Run the "Chat UI for AiMedOrchestra" cell and start talking:
+# Open: aimedorchestra_demo_notebook_chat.ipynb
+# Run the "Chat UI for AiMedOrchestra" cell, then try:
 #   - "create two synthetic patients"
 #   - "diagnose a 55 yo female with chest pain and cough"
 #   - "find clinical trials for lung cancer near Boston"
 #   - 'run full pipeline on {"age":60, "sex":"male"}'
 ```
 
----
-
-## 4) Quick conversational REPL (no notebook required)
-
-**Best with editable install (`pip install -e .`):**
+### 3.4 Quick Conversational REPL
+**If installed with `pip install -e .`:**
 ```bash
 python - << 'PY'
 from aimedorchestra.orchestrator.agent import aimedorchestraAgent
@@ -224,7 +98,7 @@ print(orch.route('run full pipeline on {"age":60,"sex":"male","conditions":["dia
 PY
 ```
 
-**Alternative (use the top-level file from the repo root):**
+**Alternative (use top‑level file from repo root):**
 ```bash
 PYTHONPATH=. python - << 'PY'
 from aimedorchestraagent import aimedorchestraAgent
@@ -232,12 +106,10 @@ print(aimedorchestraAgent().route("create 3 synthetic patients"))
 PY
 ```
 
----
+### 3.5 Run Per‑Agent Demo Apps
 
-## 5) Run per-agent demo apps
-
-### If the app is **Streamlit**
-> If the app can’t see the package, prefix with `PYTHONPATH=.`  
+**Streamlit**
+> If the app can’t import the package, prefix with `PYTHONPATH=.`
 ```bash
 PYTHONPATH=. streamlit run apps/orchestrator_app.py
 # or per-agent:
@@ -246,7 +118,7 @@ PYTHONPATH=. streamlit run apps/orchestrator_app.py
 # ...
 ```
 
-### If the app is **pure Python / Dash**
+**Pure Python / Dash**
 ```bash
 python apps/orchestrator_app.py
 # or per-agent:
@@ -254,57 +126,59 @@ python apps/orchestrator_app.py
 # python apps/diagnostics_app.py
 # ...
 ```
-> Most Streamlit apps listen on port **8501** and Dash commonly on **8050**. The app will announce the URL in your terminal.
+> Streamlit typically uses **8501**; Dash commonly uses **8050**.
 
----
-
-## 6) (Optional) Docker
-Your repo has a `Dockerfile` (no `docker-compose.yml` in the tree). Build and run directly:
-
+### 3.6 Docker (Optional)
 ```bash
-# Build
 docker build -t aimed:latest .
-
-# Run — pick the likely port based on your app:
 # If Streamlit (8501):
 docker run --rm -p 8501:8501 aimed
 # If Dash/Flask (8050):
 # docker run --rm -p 8050:8050 aimed
 ```
-Then open the URL it prints (e.g., http://localhost:8501 or http://localhost:8050).
 
-> If you later add a `docker-compose.yml`, you can switch to `docker compose up --build`.
+### 3.7 Kubernetes (Optional)
+```bash
+# Local K8s
+kind create cluster --name aimed
 
+# Deploy
+kubectl apply -f k8s_deployment.yaml
+
+# Check rollout
+kubectl get pods
+kubectl logs deploy/aimedorchestra -f
+# Optional port-forward:
+kubectl port-forward deploy/aimedorchestra 8501:8501
+```
+
+### 3.8 Data & Samples
+- Sample image: `data/sample_image.jpg`  
+- Trials JSON: `data/trials.json`  
+- Literature snippets: `data/literature/*.txt`
+
+### 3.9 Troubleshooting
+- If the package can’t be found, run with `PYTHONPATH=.` from the repo root, e.g.:
+  ```bash
+  PYTHONPATH=. python apps/orchestrator_app.py
+  ```
+- For Streamlit imports, use:
+  ```bash
+  PYTHONPATH=. streamlit run apps/orchestrator_app.py
+  ```
+- If an agent import fails, the router returns `(agent_unavailable)`. Ensure `aimedorchestra/agents/<agent>/agent.py` exists and its class ends with `Agent`.
 
 ---
 
-## 6. Summary
-- **AiMedOrchestra** is like a team of AI doctors and specialists working together inside your computer.  
-- It uses many AI “agents,” each an expert in a healthcare domain, collaborating seamlessly.  
-- This approach helps doctors manage complex information, improve care, and keep up with rapid medical advances.  
-- By running on accessible hardware, it brings cutting-edge AI hospital capabilities into any clinical or research setting.
+## 4) Summary
+AiMedOrchestra is a team of specialized AI agents coordinated by an orchestrator so you can **chat** your way through complex clinical tasks and get a single, coherent answer.
 
 ---
 
-## 7 References
- 
-| Ref | Citation | Link |
-|-----|----------|------|
-| 1 | Johnson, A. E. W. *et al.* “MIMIC-IV.” *PhysioNet* (dataset), 2023. | <https://physionet.org/content/mimiciv/2.2> |
-| 2 | Rajpurkar, P. *et al.* “CheXNet: Radiologist-Level Pneumonia Detection on Chest X-Rays with Deep Learning.” *NeurIPS ML4H Workshop*, 2017. | <https://arxiv.org/abs/1711.05225> |
-| 3 | Rives, A. *et al.* “Biological Structure and Function Emerge from Scaling Unsupervised Learning to 250 Million Protein Sequences.” *PNAS* 118 (15), 2021. | <https://www.pnas.org/doi/10.1073/pnas.2016239118> |
-| 4 | Huang, K.; Chandak, P.; Wang, Q. *et al.* “A Foundation Model for Clinician-Centered Drug Repurposing.” *Nature Medicine* 30, 3601-3613 (2024). | <https://www.nature.com/articles/s41591-024-03233-x> |
-| 5 | Jin, Q.; Wang, Z.; Floudas, C. S. *et al.* “Matching Patients to Clinical Trials with Large Language Models.” *Nature Communications* 15, Article 53081 (2024). | <https://www.nature.com/articles/s41467-024-53081-z> |
-| 6 | Mehrabi, N. *et al.* “A Survey on Bias and Fairness in Machine Learning.” *ACM Computing Surveys* 54 (6), 2021. | <https://arxiv.org/abs/1908.09635> |
-| 7 | Densen, B. “Challenges and Opportunities Facing Medical Education.” *Transactions of the American Clinical and Climatological Association* 122, 2011. | <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3116346> |
+## 5) References
+(See project README or paper references as applicable.)
 
 ---
 
-If you use AiMedOrchestra in research, please cite:
-
-Mulugeta Semework Abebe. 2025. “AiMedOrchestra: A Multi-Agent Platform for Full Med Care.” 
-
----
-
-## License
-Released under the Business Source License 1.1 – free for non-commercial & research use; commercial use requires a license after the Change Date.
+## 6) License
+Released for non‑commercial & research use. See the repository’s LICENSE file for details.
